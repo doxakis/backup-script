@@ -13,16 +13,24 @@ IF NOT EXIST %dest% GOTO MISSING_DEST_DIR
 REM Backup rotation.
 SET tempFolder=%dest%\Temp
 MKDIR %tempFolder%
-MKDIR Q:\7zBackup
-ROBOCOPY Q:\7zBackup\ %tempFolder% /move /minage:60
+MKDIR %dest%
+ROBOCOPY %dest%\ %tempFolder% /move /minage:60
 RMDIR /s /q %tempFolder%
 
 REM Backup procedure.
 
 REM Determine a unique filename.
-SET year=%date:~-4,4%
-SET month=%date:~-10,2%
-SET day=%date:~-7,2%
+for /F "skip=1 delims=" %%F in ('
+    wmic PATH Win32_LocalTime GET Day^,Month^,Year /FORMAT:TABLE
+') do (
+    for /F "tokens=1-3" %%L in ("%%F") do (
+        set day=0%%L
+        set month=0%%M
+        set year=%%N
+    )
+)
+set day=%day:~-2%
+set month=%month:~-2%
 SET hour=%time:~-11,2%
 SET hour=%hour: =0%
 SET min=%time:~-8,2%
@@ -62,6 +70,7 @@ GOTO :EOF
 ECHO The destination directory doesn't exists!
 PAUSE
 GOTO :EOF
+
 :NOTINSTALLED
 ECHO Cannot find 7-Zip, please install it from: http://7-zip.org/
 PAUSE
