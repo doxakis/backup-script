@@ -20,17 +20,17 @@ RMDIR /s /q %tempFolder%
 REM Backup procedure.
 
 REM Determine a unique filename.
-for /F "skip=1 delims=" %%F in ('
+FOR /F "skip=1 delims=" %%F IN ('
     wmic PATH Win32_LocalTime GET Day^,Month^,Year /FORMAT:TABLE
-') do (
-    for /F "tokens=1-3" %%L in ("%%F") do (
-        set day=0%%L
-        set month=0%%M
-        set year=%%N
+') DO (
+    FOR /F "tokens=1-3" %%L IN ("%%F") DO (
+        SET day=0%%L
+        SET month=0%%M
+        SET year=%%N
     )
 )
-set day=%day:~-2%
-set month=%month:~-2%
+SET day=%day:~-2%
+SET month=%month:~-2%
 SET hour=%time:~-11,2%
 SET hour=%hour: =0%
 SET min=%time:~-8,2%
