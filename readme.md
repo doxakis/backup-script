@@ -13,3 +13,6 @@ The script focus on speed and security. The script use lot of space. Space is ch
 The goal of this project is to suggest a backup strategy. Everything remain on your own infrastructure. (no need to use cloud storage) The Live drive gives you quick access to your files. The Active Backup allow you to setup automatic backup (daily/weekly). The two Offsite drives allow you to keep at any given time a backup outside of your house. (case of natural disaster and keep one drive completly disconnected from any machine)
 
 Note: Currently, it does work only on Windows. A similar logic could be reuse for other platforms.
+
+# Copyright and license
+Code released under the MIT license.
